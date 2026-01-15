@@ -1,13 +1,8 @@
 import React, { useState } from 'react';
 import { TextField } from '../TextField';
-type Movie = {
-  title: string;
-  description: string;
-  imgUrl: string;
-  imdbUrl: string;
-  imdbId: string;
-};
-type Props = { onAdd: (m: Movie) => void };
+import { Movie } from '../../types/Movie';
+
+type Props = { onAdd: (mov: Movie) => void };
 
 export const NewMovie: React.FC<Props> = ({ onAdd }) => {
   // Increase the count after successful form submission
@@ -21,7 +16,7 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
   const [imdbId, setImdbId] = useState('');
 
   const isFormValid = [title, imgUrl, imdbUrl, imdbId].every(
-    v => v.trim().length > 0,
+    valid => valid.trim().length > 0,
   );
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = event => {
@@ -65,7 +60,6 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
         label="Description"
         value={description}
         onChange={setDescription}
-        required
       />
 
       <TextField
